@@ -18,7 +18,7 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-load_dotenv(os.path.join(BASE_DIR, '.env')) 
+load_dotenv(os.path.join(BASE_DIR.parent.parent, '.env')) 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'backend.patient_dashboard', 
 ]
 
 MIDDLEWARE = [
@@ -104,6 +106,9 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+JWT_SECRET = os.getenv('JWT_SECRET', SECRET_KEY)
+JWT_ALGORITHM = os.getenv('JWT_ALGORITHM', 'HS256')
 
 
 # Internationalization
